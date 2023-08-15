@@ -12,6 +12,7 @@ if (numeroParcelas === 1){
     console.log(`Você pagará R$${compraDesconto.toFixed(2)}, pois à vista tem 10% de desconto`);
 } else {
     //parcelado
+    //const valorParcelado = (valorCompra / numeroParcelas).to.Fixed(2); -> é possível utilizar assim também
     const valorParcelado = valorCompra / numeroParcelas;
     console.log(`Você irá pagar ${numeroParcelas} parcelas de R$${valorParcelado.toFixed(2)}.`);
 }
