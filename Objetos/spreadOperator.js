@@ -11,4 +11,9 @@ const endereco = {
     bairro: "Bairro legal"
 }
 
-const objetoFundido = 
+const objetoFundido =  {
+    ...pessoa,
+    ...endereco,
+    novaPropriedade: 20
+}
+console.log(objetoFundido);
