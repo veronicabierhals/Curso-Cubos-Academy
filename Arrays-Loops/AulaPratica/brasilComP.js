@@ -1,7 +1,3 @@
-const palavras = ['aveia', 'manha', 'ave'] //palavras minusculas, sem acento
-const primeiraLetra = 'a' //um caracter minusculo
-const segundaLetra = 'v' //um caracter minusculo
-
 //imprimir palavras do array que tem primeiraLetra e segundaLetra
 //Caso não nenhuma palavra do array de palavras atenda aos requisitos, imprima na tela NENHUMA.
 
@@ -12,12 +8,14 @@ const segundaLetra = 'v' //um caracter minusculo
 //se não, ignora
 //se for imprimir a palavra
 //se não imprimir NENHUMA
+const palavras = ['aveia', 'manha', 'ave'] //palavras minusculas, sem acento
+const primeiraLetra = 'a' //um caracter minusculo
+const segundaLetra = 'v' //um caracter minusculo
+
 let palavrasFiltrada = []
 
 for (let palavra of palavras){
-    let letraUm = palavra[0]
-    let letraDois = palavra[1]
-    if (letraUm === primeiraLetra && letraDois === segundaLetra){
+    if (palavra[0] === primeiraLetra && palavra[1] === segundaLetra){
         palavrasFiltrada.push(palavra);
     }
 }
