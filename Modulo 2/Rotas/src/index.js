@@ -16,14 +16,20 @@ const segundoIntermediario = (req, res, next) => {
   next();
 };
 
-//intermediário independente
-app.use(primeiroIntermediario);
+//funciona somente na rota que é chamado
+const intermediarioDaRota = (req, res, next) => {
+  console.log("Passei no intemediario da rota");
+  next(); //passa para a próxima etapa
+};
 
-//intermediário independente
-app.use(segundoIntermediario);
+//intermediário independente - funciona em todas as rotas
+//app.use(primeiroIntermediario);
+//app.use(segundoIntermediario);
 
 //localhost:3000/professores
-app.get("/professores", filtrarProfessores);
+//pode colocar mais de um intermediario na rota
+//parâmetros rota, intermediario, controlador
+app.get("/professores", intermediarioDaRota, filtrarProfessores);
 
 //localhost:3000/professores/2
 app.get("/professores/:id", encontrarProfessor);

@@ -18,6 +18,7 @@ const filtrarProfessores = ((req, res) => {
 })
 
 const encontrarProfessor = ((req, res) => {
+  console.log("rota para encontrar um professor");
   //procura dentro do array professores o professor que tem o parâmetro informado na rota
   const professorEncontrado = professores.find((professor) => {
     return professor.id === Number(req.params.id); //Number transforma string em number
