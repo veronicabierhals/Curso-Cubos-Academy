@@ -35,18 +35,18 @@ create table livros (
 <br>
 
 enderecos
-- id serial
-- editora_id integer
-- cep text
-- rua text
-- bairro text
-- cidade text
-- estado text
-- pais text
+- id: serial
+- editora_id: integer
+- cep: text
+- rua: text
+- bairro: text
+- cidade: text
+- estado: text
+- pais: text
 
 ```
 create table enderecos (
-    id serial primary key,
+  id serial primary key,
   editora_id integer references editoras(id),
   cep text not null,
   rua text,
@@ -60,24 +60,24 @@ create table enderecos (
 <br>
 
 livro_categoria
-- livro_isbn integer
-- categoria_id integer
+- livro_isbn: integer
+- categoria_id: integer
 
 ```
 create table livro_categoria (
-	livro_isbn integer references livros(isbn),
+  livro_isbn integer references livros(isbn),
   categoria_id integer references categorias(id)
 );
 ```
 <br>
 
 categorias
-- id serial
-- nome text
+- id: serial
+- nome: text
 
 ```
 create table categorias (
-	id serial primary key,
+  id serial primary key,
   nome text not null
 );
 ```
@@ -86,7 +86,7 @@ create table categorias (
 
 ```
 create table comentarios (
-	id serial primary key,
+  id serial primary key,
   descricao text not null,
   comentario_id integer references comentarios(id),
   livro_isbn integer references livros(isbn)
@@ -95,8 +95,8 @@ create table comentarios (
 
 ### Relações
 editoras 1:N livros <br>
-editoras 1:1 enderecos
-livros 1:N livro_categoria
+editoras 1:1 enderecos <br>
+livros 1:N livro_categoria <br>
 livro_categoria N:1 categorias
 
 **muitos para muitos**
