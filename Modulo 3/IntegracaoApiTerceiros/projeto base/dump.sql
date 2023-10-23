@@ -11,3 +11,11 @@ create table produtos (
     descricao text,
     valor integer not null
 );
+
+create table vendas (
+     id serial primary key,
+     cliente_id integer not null references clientes(id),
+     produto_id integer not null references produtos(id),
+     quantidade integer not null,
+     transacao_id text
+);
