@@ -43,11 +43,11 @@ const venda = async (req, res) => {
 
 		return res.status(201).json(cobranca)
 	} catch (error) {
-		/*if (error.response) {
+		if (error.response) {
 			return res
 				.status(400)
 				.json({ mensagem: error.response.data.error.message })
-		}*/
+		}
 		return res.status(500).json({ mensagem: error.message})
 	}
 }
