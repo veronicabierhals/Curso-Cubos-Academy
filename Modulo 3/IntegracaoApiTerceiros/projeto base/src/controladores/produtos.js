@@ -14,7 +14,7 @@ const cadastrar = async (req, res) => {
 
 	try {
 		const query = `
-            insert into produtos (nome, descricao, valor) 
+            insert into produtos (nome, descricao, valor)
             values ($1, $2, $3) returning *
         `
 		const params = [nome, descricao, valor]
