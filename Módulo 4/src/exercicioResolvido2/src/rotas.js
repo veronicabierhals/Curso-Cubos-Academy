@@ -1,17 +1,22 @@
 const express = require("express");
-const usuarios = require("./controladores/usuarios")
+const {
+  listar,
+  obter,
+  cadastrar,
+  atualizar,
+  excluir,
+} = require("./controladores/usuarios");
 
 const rotas = express();
 
-app.get("/usuarios", usuarios.listar );
+rotas.get("/usuarios", listar);
 
-app.get("/usuarios/:id", usuarios.obter);
+rotas.get("/usuarios/:id", obter);
 
-app.post("/usuarios", usuarios.cadastrar);
+rotas.post("/usuarios", cadastrar);
 
-app.put("/usuarios/:id", usuarios.atualizar);
+rotas.put("/usuarios/:id", atualizar);
 
-app.delete("/usuarios/:id", usuarios.excluir);
+rotas.delete("/usuarios/:id", excluir);
 
-
-app.listen(3000);
+module.exports = rotas;
