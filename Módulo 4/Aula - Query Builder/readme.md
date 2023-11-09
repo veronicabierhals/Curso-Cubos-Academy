@@ -185,3 +185,13 @@ app.delete("/:id", async (req, res) => {
   return res.json(agendaExcluida);
 });
 ```
+
+### Join
+```
+app.get("/anotacoes", async (req, res) => {
+  const anotacoes = await knex("anotacoes")
+    .join("agenda", "anotacoes.agenda_id", "=", "agenda.id")
+    .select("anotacoes.*", "agenda.nome");
+  return res.json(anotacoes);
+});
+```
