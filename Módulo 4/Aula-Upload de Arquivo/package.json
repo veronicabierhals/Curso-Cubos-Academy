@@ -1,0 +1,19 @@
+{
+  "name": "aula-upload-de-arquivo",
+  "version": "1.0.0",
+  "description": "## Serviços de armazenamento * Amazon S3 * Google Cloud Storage * Firebase Storage * B3 Compatible Storage * Digital Ocean Objective * Wasabi Storage * Blackblaze - 10gb armazenamento grátis",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
