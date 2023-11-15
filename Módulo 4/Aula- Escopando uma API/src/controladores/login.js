@@ -1,7 +1,6 @@
 const bancoDeDados = require("../conexao");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const senhaHash = require("../senhaHash");
 
 const login = async (req, res) => {
   const { username, senha } = req.body;
@@ -28,7 +27,7 @@ const login = async (req, res) => {
       username: usuario.username,
     };
 
-    const token = jwt.sign(dadosTokenUsuario, senhaHash, { expiresIn: "48h" });
+    const token = jwt.sign(dadosTokenUsuario, process.env.JWT_SECRET, { expiresIn: "48h" });
 
     const { senha: _, ...dadosUsuario } = usuario;
 

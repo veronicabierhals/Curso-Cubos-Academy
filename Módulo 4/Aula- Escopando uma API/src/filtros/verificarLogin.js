@@ -1,8 +1,7 @@
 const bancoDeDados = require("../conexao");
 const jwt = require("jsonwebtoken");
-const senhaHash = require("../senhaHash");
 
-const verificarlogin = async (req, res) => {
+const verificarlogin = async (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -12,7 +11,7 @@ const verificarlogin = async (req, res) => {
   try {
     const token = authorization.replace("Bearer ", "").trim();
 
-    const { id } = jwt.verify(token, senhaHash);
+    const { id } = jwt.verify(token, process.env.JWT_SECRET);
     const usuarioExiste = await bancoDeDados("usuarios").where({ id }).first();
 
     if (!usuarioExiste) {
@@ -24,11 +23,10 @@ const verificarlogin = async (req, res) => {
     req.usuario = usuario;
 
     next();
+    
   } catch (error) {
     return res.status(400).json(error.message);
   }
 };
 
-module.exports = {
-  verificarlogin,
-};
+module.exports = verificarlogin;

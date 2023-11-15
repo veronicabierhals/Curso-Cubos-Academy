@@ -1,11 +1,11 @@
 const express = require("express");
 const usuarios = require("./controladores/usuarios");
-const { verificarlogin } = require("./filtros/verificarLogin");
 const login = require("./controladores/login");
+const verificarlogin = require('./filtros/verificarLogin')
 
 const rotas = express();
 
-rotas.put("/cadastro", usuarios.cadastrarUsuario);
+rotas.post("/cadastro", usuarios.cadastrarUsuario);
 
 rotas.post("/login", login);
 

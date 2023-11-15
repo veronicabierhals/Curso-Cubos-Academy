@@ -21,7 +21,7 @@ const cadastrarUsuario = async (req, res) => {
       .where({ username })
       .first();
 
-    if (!quantidadeUsuarios) {
+    if (quantidadeUsuarios) {
       return res.status(404).json("O username informado já existe");
     }
 
@@ -102,7 +102,7 @@ const atualizarPerfil = async (req, res) => {
       }
     }
 
-    const usuarioAtualizado = await bancoDeDados("usuario")
+    const usuarioAtualizado = await bancoDeDados("usuarios")
       .where({ id })
       .update({
         nome,

@@ -4,7 +4,7 @@ create table usuarios (
   id serial primary key,
   nome text,
   imagem text,
-  usarname text not null unique,
+  username text not null unique,
   email text unique,
   site text,
   bio text,
