@@ -2,7 +2,7 @@ const express = require("express");
 const usuarios = require("./controladores/usuarios");
 const login = require("./controladores/login");
 const verificarlogin = require("./filtros/verificarLogin");
-const { novaPostagem } = require("./controladores/postagens");
+const { novaPostagem, curtir } = require("./controladores/postagens");
 
 const rotas = express();
 
@@ -16,5 +16,6 @@ rotas.get("/perfil", usuarios.obterPerfil);
 rotas.put("/perfil", usuarios.atualizarPerfil);
 
 rotas.post("/postagens", novaPostagem);
+rotas.post("/postagens/:postagemId/curtir", curtir);
 
 module.exports = rotas;
