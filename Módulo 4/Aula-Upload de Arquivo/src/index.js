@@ -67,25 +67,39 @@ app.post("/upload-multiple", multer.array("arquivo"), async (req, res) => {
 });
 
 app.get("/arquivos", async (req, res) => {
-    try {
-      const arquivos = await s3
-        .listObjects({
-          Bucket: process.env.BACKBLAZE_BUCKET,
-        })
-        .promise();
-  
-      const files = arquivos.Contents.map((file) => ({
-        url: `https://${process.env.BACKBLAZE_BUCKET}.${process.env.ENDPOINT_S3}/${file.Key}`,
-        path: file.Key,
-      }));
-  
-      return res.json(files);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-  
+  try {
+    const arquivos = await s3
+      .listObjects({
+        Bucket: process.env.BACKBLAZE_BUCKET,
+      })
+      .promise();
 
+    const files = arquivos.Contents.map((file) => ({
+      url: `https://${process.env.BACKBLAZE_BUCKET}.${process.env.ENDPOINT_S3}/${file.Key}`,
+      path: file.Key,
+    }));
 
+    return res.json(files);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete("/arquivos", async (req, res) => {
+  const { file } = req.query;
+
+  try {
+    await s3
+      .deleteObject({
+        Bucket: process.env.BACKBLAZE_BUCKET,
+        Key: file,
+      })
+      .promise();
+
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 app.listen(process.env.PORT);
