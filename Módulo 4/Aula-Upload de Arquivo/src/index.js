@@ -67,17 +67,25 @@ app.post("/upload-multiple", multer.array("arquivo"), async (req, res) => {
 });
 
 app.get("/arquivos", async (req, res) => {
-  try {
-    const arquivos = await s3
-      .listObjects({
-        Bucket: process.env.BACKBLAZE_BUCKET,
-      })
-      .promise();
+    try {
+      const arquivos = await s3
+        .listObjects({
+          Bucket: process.env.BACKBLAZE_BUCKET,
+        })
+        .promise();
+  
+      const files = arquivos.Contents.map((file) => ({
+        url: `https://${process.env.BACKBLAZE_BUCKET}.${process.env.ENDPOINT_S3}/${file.Key}`,
+        path: file.Key,
+      }));
+  
+      return res.json(files);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+  
 
-    return res.json(arquivos.Contents);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-});
+
 
 app.listen(process.env.PORT);
