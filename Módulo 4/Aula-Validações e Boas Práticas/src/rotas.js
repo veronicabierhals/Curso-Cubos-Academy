@@ -7,12 +7,6 @@ const rotas = express();
 
 rotas.get("/usuario", listarUsuario);
 
-
-rotas.post(
-  "/usuario",
-  validarCorpoRequisicao(schemaUsuario),
-  cadastrarUsuario
-);
-
+rotas.post("/usuario", validarCorpoRequisicao(schemaUsuario), cadastrarUsuario);
 
 module.exports = rotas;

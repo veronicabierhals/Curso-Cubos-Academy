@@ -5,12 +5,14 @@ const listarUsuario = async (req, res) => {
 };
 
 const cadastrarUsuario = async (req, res) => {
-  const { nome, email, senha } = req.body;
+  const { nome, email, senha, idade, ativo } = req.body;
   try {
     const novoUsuario = {
       nome,
       email,
       senha,
+      idade,
+      ativo,
     };
 
     usuarios.push(novoUsuario);
