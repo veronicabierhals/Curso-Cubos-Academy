@@ -4,22 +4,6 @@ const bancoDeDados = require("./conexao");
 const cadastrarUsuario = async (req, res) => {
   const { nome, email, senha, telefone } = req.body;
 
-  if (!nome) {
-    return res.status(404).json("O campo nome é obrigatório");
-  }
-
-  if (!email) {
-    return res.status(404).json("O campo email é obrigatório");
-  }
-
-  if (!senha) {
-    return res.status(404).json("O campo senha é obrigatório");
-  }
-
-  if (!telefone) {
-    return res.status(404).json("O campo telefone é obrigatório");
-  }
-
   try {
     const usuarioEncontrado = await bancoDeDados("usuarios")
       .where({ email })
@@ -53,12 +37,6 @@ const verificarUsuario = async (req, res) => {
 const atualizarUsuario = async (req, res) => {
   const { nome, email, senha, telefone } = req.body;
   const { id } = req.usuario;
-
-  if (!nome && !email && !senha && !telefone) {
-    return res
-      .status(404)
-      .json("É obrigatório informar ao menos um campo para atualização");
-  }
 
   try {
     const usuarioExiste = await bancoDeDados("usuarios").where({ id }).first();
