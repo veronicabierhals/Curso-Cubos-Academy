@@ -51,7 +51,7 @@ const verificarUsuario = async (req, res) => {
 };
 
 const atualizarUsuario = async (req, res) => {
-  let { nome, email, senha, telefone } = req.body;
+  const { nome, email, senha, telefone } = req.body;
   const { id } = req.usuario;
 
   if (!nome && !email && !senha && !telefone) {
@@ -64,12 +64,10 @@ const atualizarUsuario = async (req, res) => {
     const usuarioExiste = await bancoDeDados("usuarios").where({ id }).first();
 
     if (!usuarioExiste) {
-      return res.status(404).json("Usuario não encontrado");
+      return res.status(404).json({ mensagem: "Usuario não encontrado" });
     }
 
-    if (senha) {
-      senha = await bcrypt.hash(senha, 10);
-    }
+    const senhaCriptografada = await bcrypt.hash(senha, 10);
 
     if (email !== req.usuario.email) {
       const emailUsuarioExiste = await bancoDeDados("usuarios")
@@ -77,28 +75,20 @@ const atualizarUsuario = async (req, res) => {
         .first();
 
       if (emailUsuarioExiste) {
-        res.status(404).json("O Email já existe.");
-        return;
+        return res.status(400).json({ mensagem: "O e-mail já existe." });
       }
     }
 
-    const usuarioAtualizado = await bancoDeDados("usuarios")
-      .where({ id })
-      .update({
-        nome,
-        email,
-        senha,
-        telefone,
-      });
+    await bancoDeDados("usuarios").where({ id }).update({
+      nome,
+      email,
+      senha: senhaCriptografada,
+      telefone,
+    });
 
-    if (!usuarioAtualizado) {
-      return res.status(400).json("O usuario não foi atualizado");
-    }
-
-    res.status(200).json("Usuario foi atualizado com sucesso.");
-    return;
+    return res.status(204).send();
   } catch (error) {
-    return res.status(400).json(error.message);
+    return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
   }
 };
 
