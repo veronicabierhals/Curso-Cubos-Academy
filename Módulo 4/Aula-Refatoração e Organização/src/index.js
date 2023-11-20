@@ -1,18 +1,19 @@
+require('dotenv').config()
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const app = express();
 app.use(express.json());
 
-const hash = 'uV9R6dJBs7erwsBw8giLZyexOjw';
+const hash = process.env.JWT_HASH;
 
 const knex = require('knex')({
     client: 'pg',
     connection: {
-        host: 'localhost',
-        user: 'postgres',
-        password: '270190',
-        database: 'sistema_cadastro'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME
     }
 });
 
@@ -212,4 +213,4 @@ app.put('/perfil', async (req, res) => {
     }
 });
 
-app.listen(3000);
+app.listen(process.env.PORT, () =>{console.log(process.env.PORT);});
