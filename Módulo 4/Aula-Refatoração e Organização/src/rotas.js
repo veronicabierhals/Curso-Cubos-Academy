@@ -4,8 +4,7 @@ const rotas = express()
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const bancoDeDados = require('./conexao');
-
-const hash = process.env.JWT_HASH;
+const filtroLogin = require('./intermediarios/filtroLogin');
 
 rotas.post('/usuarios', async (req, res) => {
   const {
@@ -103,35 +102,7 @@ rotas.post('/login', async (req, res) => {
   }
 });
 
-rotas.use(async (req, res, next) => {
-  const { authorization } = req.headers;
-
-  if (!authorization) {
-      return res.status(401).json('Não autorizado');
-  }
-
-  try {
-      const token = authorization.replace('Bearer ', '').trim();
-
-      const {
-          id
-      } = jwt.verify(token, hash);
-
-      const usuarioExiste = await bancoDeDados('usuarios').where({ id }).first();
-
-      if (!usuarioExiste) {
-          return res.status(404).json('Usuario não encontrado');
-      }
-
-      const { senha, ...usuario } = usuarioExiste;
-
-      req.usuario = usuario;
-
-      next();
-  } catch (error) {
-      return res.status(400).json(error.message);
-  }
-});
+rotas.use(filtroLogin);
 
 rotas.get('/perfil', async (req, res) => {
   return res
