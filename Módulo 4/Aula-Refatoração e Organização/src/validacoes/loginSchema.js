@@ -1,4 +1,4 @@
-const joi = require("joi");
+const joi = require("joi")
 
 const loginSchema = joi.object({
   email: joi.string().email().required().messages({
@@ -12,4 +12,4 @@ const loginSchema = joi.object({
   }),
 });
 
-module.exports = loginSchema;
+module.exports = loginSchema

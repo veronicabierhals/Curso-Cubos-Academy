@@ -1,4 +1,4 @@
-const bancoDeDados = require("./conexao");
+const bancoDeDados = require("../conexao")
 const jwt = require("jsonwebtoken");
 
 const hash = process.env.JWT_HASH;

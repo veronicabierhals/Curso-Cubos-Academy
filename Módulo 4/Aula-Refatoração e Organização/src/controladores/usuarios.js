@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const bancoDeDados = require("./conexao");
+const bancoDeDados = require("../conexao");
 
 const cadastrarUsuario = async (req, res) => {
   const { nome, email, senha, telefone } = req.body;
@@ -24,7 +24,9 @@ const cadastrarUsuario = async (req, res) => {
       })
       .returning("*");
 
-    return res.status(201).json(usuario[0]);
+    const { senha: _, ...usuarioCadastrado } = usuario[0];
+
+    return res.status(201).json(usuarioCadastrado);
   } catch (error) {
     return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
   }

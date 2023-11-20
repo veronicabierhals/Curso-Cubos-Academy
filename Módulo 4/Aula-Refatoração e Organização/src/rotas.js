@@ -9,8 +9,8 @@ const {
 } = require("./controladores/usuarios");
 const { login } = require("./controladores/autenticacao");
 const validarRequisicao = require("./intermediarios/validarRequisicao");
-const usuarioSchema = require("./validacoes/usuarioSchema");
 const loginSchema = require("./validacoes/loginSchema");
+const usuarioSchema = require("./validacoes/usuarioSchema");
 
 rotas.post("/usuarios", validarRequisicao(usuarioSchema), cadastrarUsuario);
 
