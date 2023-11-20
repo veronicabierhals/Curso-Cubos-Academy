@@ -27,7 +27,7 @@ const filtroLogin = async (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(500).json({mensagem: "Erro interno do Servido!"});
+    return res.status(500).json({mensagem: "Erro interno do Servidor!"});
   }
 };
 
