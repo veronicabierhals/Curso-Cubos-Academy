@@ -4,7 +4,7 @@ const validarRequisicao = (schema) => async (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(400).json({ mensagem: error.menssage });
+    return res.status(400).json({ mensagem: error.message });
   }
 };
 
