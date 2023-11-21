@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const bancoDeDados = require("../conexao");
 
 const cadastrarUsuario = async (req, res) => {
+  console.log("Dados da requisição:", req.body);
   const { nome, email, senha, telefone } = req.body;
 
   try {
@@ -20,7 +21,7 @@ const cadastrarUsuario = async (req, res) => {
         nome,
         email,
         senha: senhaCriptografada,
-        telefone,
+        telefone: telefone,
       })
       .returning("*");
 
@@ -28,6 +29,7 @@ const cadastrarUsuario = async (req, res) => {
 
     return res.status(201).json(usuarioCadastrado);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
   }
 };
@@ -54,6 +56,8 @@ const atualizarUsuario = async (req, res) => {
         .where({ email })
         .first();
 
+
+
       if (emailUsuarioExiste) {
         return res.status(400).json({ mensagem: "O e-mail já existe." });
       }
@@ -68,6 +72,7 @@ const atualizarUsuario = async (req, res) => {
 
     return res.status(204).send();
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
   }
 };

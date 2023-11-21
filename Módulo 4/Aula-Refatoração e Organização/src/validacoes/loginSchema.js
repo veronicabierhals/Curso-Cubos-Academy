@@ -9,7 +9,7 @@ const loginSchema = joi.object({
   senha: joi.string().required().messages({
     "any.required": "O campo senha é obrigatório.",
     "string.empty": "O campo senha é obrigatório.",
-  }),
+  })
 });
 
 module.exports = loginSchema

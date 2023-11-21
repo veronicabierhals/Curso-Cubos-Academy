@@ -14,6 +14,7 @@ const usuarioSchema = require("./validacoes/usuarioSchema");
 
 rotas.post("/usuarios", validarRequisicao(usuarioSchema), cadastrarUsuario);
 
+
 rotas.post("/login", validarRequisicao(loginSchema), login);
 
 rotas.use(filtroLogin);

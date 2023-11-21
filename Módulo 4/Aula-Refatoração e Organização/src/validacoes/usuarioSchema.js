@@ -18,6 +18,6 @@ const usuarioSchema = joi.object({
     "any.required": "O campo telefone é obrigatório.",
     "string.empty": "O campo telefone é obrigatório."
   })
-})
+});
 
 module.exports = usuarioSchema
